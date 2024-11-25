@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ChatApp_FireBase</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="add_image">Add Image</string>
+    <string name="name">Name</string>
+    <string name="confirm_your_password">Confirm your password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="select_user">Select User</string>
+    <string name="aa">Aa</string>
+    <string name="online">Online</string>
+    <string name="chat_messager">Chat Messager</string>
+</resources>
