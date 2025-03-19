@@ -12,7 +12,7 @@ Các tính năng cơ bản:
 
 # Kiến thức sử dụng: 
 Ngôn ngữ sử dụng: Kotlin
-. Mô hình xây dựng: MVC
-. Firebase lưu trữ, quản lý dữ liệu 
-. SharedPreferences quản lý và lưu trữ dữ liệu cục bộ(dữ liệu người dùng: trạng thái đăng nhập, các thông tin cá nhân,...)
+1. Mô hình xây dựng: MVC
+2. Firebase lưu trữ, quản lý dữ liệu
+3. SharedPreferences quản lý và lưu trữ dữ liệu cục bộ(dữ liệu người dùng: trạng thái đăng nhập, các thông tin cá nhân,...)
 ...
