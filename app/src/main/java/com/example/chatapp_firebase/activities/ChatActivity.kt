@@ -18,11 +18,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatapp_firebase.adapters.ChatAdapter
 import com.example.chatapp_firebase.databinding.ActivityChatBinding
 import com.example.chatapp_firebase.models.ChatMessage
 import com.example.chatapp_firebase.models.User
+import com.example.chatapp_firebase.network.ApiClient
+import com.example.chatapp_firebase.network.ApiService
 import com.example.chatapp_firebase.utilities.Constants
 import com.example.chatapp_firebase.utilities.PreferenceManager
 import com.google.android.gms.tasks.OnCompleteListener
@@ -30,6 +33,12 @@ import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
@@ -170,9 +179,68 @@ class ChatActivity : BaseActivity() {
             }
             addConversion(conversion)
         }
+        /*if (!isReceiverAvailable) {
+            try {
+                val tokens = JSONArray()
+                tokens.put(receiverUser.token)
+
+                val data = JSONObject()
+                data.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
+                data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME))
+                data.put(Constants.KEY_FCM_TOKEN, preferenceManager.getString(Constants.KEY_FCM_TOKEN))
+                data.put(Constants.KEY_MESSAGE, binding.inputMessage.text.toString())
+
+                val body = JSONObject()
+                body.put(Constants.REMOTE_MSG_DATA, data)
+                body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens)
+
+                sendNotification(body.toString())
+            } catch (exception: Exception) {
+                exception.message?.let { showToast(it) }
+            }
+        }
+
+        binding.inputMessage.setText(null)
+*/
         binding.inputMessage.text = null
         base64ImageString = null // Reset the image string after sending
     }
+
+    /*private fun showToast(message: String){
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun sendNotification(messageBody: String) {
+        ApiClient.getClient().create(ApiService::class.java).sendMessage(
+            Constants.getRemoteMsgHeaders(),
+            messageBody
+        ).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    try {
+                        response.body()?.let {
+                            val responseJson = JSONObject(it)
+                            val results = responseJson.getJSONArray("results")
+                            if (responseJson.getInt("failure") == 1) {
+                                val error = results.getJSONObject(0)
+                                showToast(error.getString("error"))
+                                return
+                            }
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                    showToast("Notification sent successfully")
+                }
+                else{
+                    showToast("Error: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                showToast(t.message.toString())
+            }
+        })
+    }*/
 
     private fun listenAvailabilityOfReceiver() {
         database.collection(Constants.KEY_COLLECTION_USERS)
